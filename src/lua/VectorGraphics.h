@@ -21,14 +21,18 @@ public:
 
     void playhead( float clock ){ this->clock = clock; }
 
+    void variable( std::string name, double value ){ script.setNumber( name, (lua_Number) value ); }
+   
+    void variable( std::string name, bool value ){ script.setBool( name, value ); }
+
     ofParameter<float> speed;
+    
+    ofxLua script;    
         
 private:
 
     bool loaded;
 
-    ofxLua lua;    
-    
     std::string filename;
 
     void errorReceived(std::string& msg);

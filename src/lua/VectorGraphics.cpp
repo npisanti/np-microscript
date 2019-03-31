@@ -15,7 +15,7 @@ int np::lua::VectorGraphics::constructed = 0;
 np::lua::VectorGraphics::VectorGraphics(){
     loaded = false;
 
-	lua.addListener(this);
+	script.addListener(this);
     before = 0.0f;
     speed = 1.0f;
     
@@ -32,9 +32,9 @@ np::lua::VectorGraphics::VectorGraphics(){
 
 np::lua::VectorGraphics::~VectorGraphics(){
     if(loaded){
-        lua.scriptExit();
+        script.scriptExit();
     }    
-    lua.clear();
+    script.clear();
     
     constructed--;
     if(constructed==0){
@@ -44,13 +44,13 @@ np::lua::VectorGraphics::~VectorGraphics(){
 
 void np::lua::VectorGraphics::reload(){
     if(loaded){
-        lua.scriptExit();
+        script.scriptExit();
     }
-    lua.init(true);
-    luaopen_lvg(lua); 
-    luaopen_lfo(lua); 
-    lua.doScript( filepath, true);
-    lua.scriptSetup();
+    script.init(true);
+    luaopen_lvg(script); 
+    luaopen_lfo(script); 
+    script.doScript( filepath, true);
+    script.scriptSetup();
     loaded = true;
     before = ofGetElapsedTimef();
     
@@ -69,8 +69,8 @@ void np::lua::VectorGraphics::render( ofFbo & fbo ){
     fbo.begin();
         ofSetColor(255);
         lvg::beginFrame( fbo.getWidth(), fbo.getHeight() );
-        lua.scriptUpdate();
-        lua.scriptDraw();
+        script.scriptUpdate();
+        script.scriptDraw();
         lvg::endFrame();
     fbo.end();
 
@@ -88,8 +88,8 @@ void np::lua::VectorGraphics::draw( int x, int y, int w, int h ){
 
         ofSetColor(255);
         lvg::beginFrame( w, h );
-        lua.scriptUpdate();
-        lua.scriptDraw();
+        script.scriptUpdate();
+        script.scriptDraw();
         lvg::endFrame();
     ofPopMatrix();
 }
