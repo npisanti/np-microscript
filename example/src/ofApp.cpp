@@ -61,6 +61,19 @@ void dragEvent(ofDragInfo dragInfo){ }
 }; // class ofApp
 
 int main(){
-	ofSetupOpenGL( 800, 480, OF_WINDOW);
-	ofRunApp( new ofApp() );
+
+#ifdef __ARM_ARCH
+    ofGLESWindowSettings settings;
+    settings.glesVersion = 2;
+#else
+    ofGLFWWindowSettings settings;
+    settings.resizable = true;
+#endif
+
+    settings.setSize( 800, 480 );    
+
+    shared_ptr<ofAppBaseWindow> mainWindow = ofCreateWindow(settings);
+    shared_ptr<ofApp> mainApp(new ofApp);
+    ofRunApp(mainWindow, mainApp);
+    ofRunMainLoop();
 }
