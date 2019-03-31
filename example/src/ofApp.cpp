@@ -61,6 +61,6 @@ void dragEvent(ofDragInfo dragInfo){ }
 }; // class ofApp
 
 int main(){
-	ofSetupOpenGL(1024,768, OF_WINDOW);
+	ofSetupOpenGL( 800, 480, OF_WINDOW);
 	ofRunApp( new ofApp() );
 }
