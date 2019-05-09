@@ -1,5 +1,5 @@
 
-#include "lvg.h"
+#include "us.h"
 
 #ifdef __ARM_ARCH
     #ifndef NANOVG_GLES2_IMPLEMENTATION
@@ -13,7 +13,7 @@
 
 #include "nanovg/src/nanovg_gl.h"
 
-namespace lvg {
+namespace us {
 
     struct NVGcontext* _vg;
     int w;
@@ -62,14 +62,17 @@ namespace lvg {
         aspect = double(width)/double(height);
         // reset defaults
         nvgReset( _vg );
-        nvgScale( _vg, height, -height );
-        nvgTranslate( _vg, 0.0, -1.0 );
+      
         bFill = 0;
-        nvgStrokeWidth( _vg, 0.05 );
-        
         // change blending for nvg alpha
         //nvgGlobalCompositeBlendFunc( _vg, NVG_SRC_ALPHA, NVG__DST_ALPHA);   
         //nvgGlobalCompositeOperation( _vg, NVG_SOURCE_OVER );
+    }
+    
+    void relative(){
+        nvgScale( _vg, h, -h );
+        nvgTranslate( _vg, aspect*0.5, -0.5 );
+        nvgStrokeWidth( _vg, 0.05 );
     }
 
     void endFrame(){
@@ -283,10 +286,6 @@ namespace lvg {
         return aspect;
     }
 
-    void center(){
-        nvgTranslate( _vg, aspect*0.5, 0.5 );
-    }
-    
     void translate( double x, double y ){
         nvgTranslate( _vg, x, y );
     }

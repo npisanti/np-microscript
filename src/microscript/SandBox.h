@@ -8,13 +8,13 @@
 
 #include "FileWatcher.h"
 
-namespace np{ namespace lua {
+namespace np{ namespace microscript {
     
-class VectorGraphics : public FileWatcher, public ofxLuaListener {
+class SandBox : public FileWatcher, public ofxLuaListener {
     
 public:
-    VectorGraphics();
-    ~VectorGraphics();
+    SandBox();
+    ~SandBox();
     
     void render( ofFbo & fbo );
     void draw( int x, int y, int w, int h );

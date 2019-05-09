@@ -6,13 +6,13 @@ SWIG = swig
 LANG = lua
 
 # which module to build
-TARGET = lvg
+TARGET = us
 
 # generated bindings filename
-NAME = lvgBindings
+NAME = usBindings
 
 # where to copy the generated bindings
-DEST_DIR = ../src/lua/bindings
+DEST_DIR = ../src/microscript/bindings
 
 # any extra SWIG flags per-language, etc
 SWIG_FLAGS = -O -small
@@ -31,9 +31,9 @@ ifeq ($(ATTRIBUTES), true)
 	CFLAGS += -DATTRIBUTES
 endif
 
-.PHONY: all bindings symbols clean lvg-prepare lvg lfo
+.PHONY: all bindings symbols clean us-prepare us lfo
 
-all: lvg lfo
+all: us lfo
 
 # generates bindings
 bindings:
@@ -51,12 +51,12 @@ clean:
 	rm -f $(DEST_DIR)/*Bindings.cpp
 	rm -f *_symbols.txt
 
-# lvg bindings
-lvg-prepare:
-	$(eval TARGET := lvg)
-	$(eval NAME := lvgBindings)
+# us bindings
+us-prepare:
+	$(eval TARGET := us)
+	$(eval NAME := usBindings)
 
-lvg: lvg-prepare bindings
+us: us-prepare bindings
 
 # lfo bindings
 lfo-prepare:

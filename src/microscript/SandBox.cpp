@@ -1,18 +1,18 @@
 
-#include "VectorGraphics.h"
+#include "SandBox.h"
 
-#include "bindings/lvg.h"
+#include "bindings/us.h"
 #include "bindings/lfo.h"
 
 extern "C" {
-	int luaopen_lvg(lua_State* L);
+	int luaopen_us(lua_State* L);
     int luaopen_lfo(lua_State* L);
 }
 
 
-int np::lua::VectorGraphics::constructed = 0;
+int np::microscript::SandBox::constructed = 0;
 
-np::lua::VectorGraphics::VectorGraphics(){
+np::microscript::SandBox::SandBox(){
     loaded = false;
 
 	script.addListener(this);
@@ -24,13 +24,13 @@ np::lua::VectorGraphics::VectorGraphics(){
     clock = 0.0f;
     
     if( constructed==0 ){
-        lvg::init();
+        us::init();
     }
     
     constructed++;
 }
 
-np::lua::VectorGraphics::~VectorGraphics(){
+np::microscript::SandBox::~SandBox(){
     if(loaded){
         script.scriptExit();
     }    
@@ -38,16 +38,16 @@ np::lua::VectorGraphics::~VectorGraphics(){
     
     constructed--;
     if(constructed==0){
-        lvg::exit();
+        us::exit();
     }
 }
 
-void np::lua::VectorGraphics::reload(){
+void np::microscript::SandBox::reload(){
     if(loaded){
         script.scriptExit();
     }
     script.init(true);
-    luaopen_lvg(script); 
+    luaopen_us(script); 
     luaopen_lfo(script); 
     script.doScript( filepath, true);
     script.scriptSetup();
@@ -57,7 +57,7 @@ void np::lua::VectorGraphics::reload(){
     filename = ofFilePath::getFileName( filepath ); 
 }
     
-void np::lua::VectorGraphics::render( ofFbo & fbo ){
+void np::microscript::SandBox::render( ofFbo & fbo ){
     
     aspect = float( fbo.getWidth() ) / float( fbo.getHeight() );
     
@@ -68,15 +68,15 @@ void np::lua::VectorGraphics::render( ofFbo & fbo ){
 
     fbo.begin();
         ofSetColor(255);
-        lvg::beginFrame( fbo.getWidth(), fbo.getHeight() );
+        us::beginFrame( fbo.getWidth(), fbo.getHeight() );
         script.scriptUpdate();
         script.scriptDraw();
-        lvg::endFrame();
+        us::endFrame();
     fbo.end();
 
 }
 
-void np::lua::VectorGraphics::draw( int x, int y, int w, int h ){
+void np::microscript::SandBox::draw( int x, int y, int w, int h ){
     ofPushMatrix();
     ofTranslate( x, y );
         aspect = float( w ) / float( h );
@@ -87,13 +87,13 @@ void np::lua::VectorGraphics::draw( int x, int y, int w, int h ){
         lfo::setPlayHead( clock );
 
         ofSetColor(255);
-        lvg::beginFrame( w, h );
+        us::beginFrame( w, h );
         script.scriptUpdate();
         script.scriptDraw();
-        lvg::endFrame();
+        us::endFrame();
     ofPopMatrix();
 }
 
-void np::lua::VectorGraphics::errorReceived(std::string& msg) {
+void np::microscript::SandBox::errorReceived(std::string& msg) {
 	ofLogNotice() << "[ "<<filename<<" ] got a script error: " << msg;
 }

@@ -1,27 +1,25 @@
 
 #include "ofMain.h"
-#include "lua/VectorGraphics.h"
+#include "microscript/SandBox.h"
 
 class ofApp : public ofBaseApp{
     
 // ---------- variables ----------------------------------------
         
-np::lua::VectorGraphics lua;
+np::microscript::SandBox script;
 ofFbo fbo;
 
 //--------------------------------------------------------------
 void setup(){
     ofBackground( 0 );
 
-    lua.load( "/home/nicola/oF/addons/np-luavg/example/bin/data/sigil.lua" );
+    script.load( "/home/nicola/oF/addons/np-microscript/example/bin/data/sigil.lua" );
     fbo.allocate( ofGetWidth(), ofGetHeight() );
 }
 
 //--------------------------------------------------------------
 void update(){
-    
-    lua.render( fbo );
-
+    script.render( fbo );
 }
 
 //--------------------------------------------------------------

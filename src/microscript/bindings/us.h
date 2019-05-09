@@ -5,7 +5,7 @@
 #include "ofMain.h"
 #include "nanovg/src/nanovg.h"
 
-namespace lvg {
+namespace us {
 
     void size( int w, int h );
     void framerate( int value );
@@ -80,7 +80,8 @@ namespace lvg {
     void rotate( double rad );
     void scale( double x, double y );
     double ratio();
-    void center(); // translate to center
+ 
+    void relative(); // relative mode, translate to center and values in pct
     
 
     // ---------- used from np::lua::VectorGraphics ------------
