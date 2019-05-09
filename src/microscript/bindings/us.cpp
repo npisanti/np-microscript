@@ -270,6 +270,9 @@ namespace us {
     void setJoinBevel(){ nvgLineJoin(_vg, NVG_BEVEL); }
     void setJoinMiter(){ nvgLineJoin(_vg, NVG_MITER); }
 
+    double width(){ return w; }
+    double height(){ return h; }
+
     void push(){
         nvgSave( _vg );
     }

@@ -72,6 +72,8 @@ namespace us {
     double random( double min, double max );
     bool chance( double value );
         
+    double width();
+    double height();
         
     void push();
     void pop();

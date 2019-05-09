@@ -2949,6 +2949,12 @@ static int _wrap_chance(lua_State* L) { int SWIG_arg = 0; double arg1 ; bool res
   if(!lua_isnumber(L,1)) SWIG_fail_arg("us::chance",1,"double"); arg1 = (double)lua_tonumber(L, 1);
   result = (bool)us::chance(arg1); lua_pushboolean(L,(int)(result!=0)); SWIG_arg++; return SWIG_arg; if(0) SWIG_fail; fail:
   lua_error(L); return SWIG_arg; }
+static int _wrap_width(lua_State* L) { int SWIG_arg = 0; double result; SWIG_check_num_args("us::width",0,0)
+  result = (double)us::width(); lua_pushnumber(L, (lua_Number) result); SWIG_arg++; return SWIG_arg; if(0) SWIG_fail; fail:
+  lua_error(L); return SWIG_arg; }
+static int _wrap_height(lua_State* L) { int SWIG_arg = 0; double result; SWIG_check_num_args("us::height",0,0)
+  result = (double)us::height(); lua_pushnumber(L, (lua_Number) result); SWIG_arg++; return SWIG_arg; if(0) SWIG_fail; fail:
+  lua_error(L); return SWIG_arg; }
 static int _wrap_push(lua_State* L) { int SWIG_arg = 0; SWIG_check_num_args("us::push",0,0) us::push(); return SWIG_arg;
   if(0) SWIG_fail; fail: lua_error(L); return SWIG_arg; }
 static int _wrap_pop(lua_State* L) { int SWIG_arg = 0; SWIG_check_num_args("us::pop",0,0) us::pop(); return SWIG_arg;
@@ -3025,6 +3031,8 @@ static swig_lua_method swig_SwigModule_methods[]= {
     { "map", _wrap_map},
     { "random", _wrap_random},
     { "chance", _wrap_chance},
+    { "width", _wrap_width},
+    { "height", _wrap_height},
     { "push", _wrap_push},
     { "pop", _wrap_pop},
     { "reset", _wrap_reset},
