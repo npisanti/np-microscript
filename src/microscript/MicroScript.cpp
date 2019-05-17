@@ -1,5 +1,5 @@
 
-#include "SandBox.h"
+#include "MicroScript.h"
 
 #include "bindings/us.h"
 #include "bindings/lfo.h"
@@ -10,9 +10,9 @@ extern "C" {
 }
 
 
-int np::microscript::SandBox::constructed = 0;
+int np::MicroScript::constructed = 0;
 
-np::microscript::SandBox::SandBox(){
+np::MicroScript::MicroScript(){
     loaded = false;
 
 	script.addListener(this);
@@ -30,7 +30,7 @@ np::microscript::SandBox::SandBox(){
     constructed++;
 }
 
-np::microscript::SandBox::~SandBox(){
+np::MicroScript::~MicroScript(){
     if(loaded){
         script.scriptExit();
     }    
@@ -42,7 +42,7 @@ np::microscript::SandBox::~SandBox(){
     }
 }
 
-void np::microscript::SandBox::reload(){
+void np::MicroScript::reload(){
     if(loaded){
         script.scriptExit();
     }
@@ -57,7 +57,7 @@ void np::microscript::SandBox::reload(){
     filename = ofFilePath::getFileName( filepath ); 
 }
     
-void np::microscript::SandBox::render( ofFbo & fbo ){
+void np::MicroScript::render( ofFbo & fbo ){
     
     aspect = float( fbo.getWidth() ) / float( fbo.getHeight() );
     
@@ -76,7 +76,7 @@ void np::microscript::SandBox::render( ofFbo & fbo ){
 
 }
 
-void np::microscript::SandBox::draw( int x, int y, int w, int h ){
+void np::MicroScript::draw( int x, int y, int w, int h ){
     ofPushMatrix();
     ofTranslate( x, y );
         aspect = float( w ) / float( h );
@@ -94,6 +94,6 @@ void np::microscript::SandBox::draw( int x, int y, int w, int h ){
     ofPopMatrix();
 }
 
-void np::microscript::SandBox::errorReceived(std::string& msg) {
+void np::MicroScript::errorReceived(std::string& msg) {
 	ofLogNotice() << "[ "<<filename<<" ] got a script error: " << msg;
 }

@@ -1,12 +1,12 @@
 
 #include "ofMain.h"
-#include "microscript/SandBox.h"
+#include "np-microscript.h"
 
 class ofApp : public ofBaseApp{
     
 // ---------- variables ----------------------------------------
         
-np::microscript::SandBox script;
+np::MicroScript script;
 ofFbo fbo;
 
 //--------------------------------------------------------------

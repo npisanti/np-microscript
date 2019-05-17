@@ -8,13 +8,13 @@
 
 #include "FileWatcher.h"
 
-namespace np{ namespace microscript {
+namespace np{ 
     
-class SandBox : public FileWatcher, public ofxLuaListener {
+class MicroScript : public FileWatcher, public ofxLuaListener {
     
 public:
-    SandBox();
-    ~SandBox();
+    MicroScript();
+    ~MicroScript();
     
     void render( ofFbo & fbo );
     void draw( int x, int y, int w, int h );
@@ -46,4 +46,4 @@ private:
     float aspect;
 };
     
-}}
+}
